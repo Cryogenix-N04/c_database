@@ -7,5 +7,4 @@ int main() {
     assert(db != NULL);
     assert(db->capacity == 16);
     assert(db->count == 0);
-    kv_free(db);
 }
