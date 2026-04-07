@@ -36,7 +36,7 @@ int kv_delete(kv_t *db, char *key) {
         kv_entry_t *entry = &db->entries[real_index];
 
         if (entry->key == NULL) {
-            return 0;
+            return -1;
         }
 
         if (entry->key &&
