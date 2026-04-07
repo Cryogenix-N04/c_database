@@ -31,7 +31,7 @@ char *kv_get(kv_t *db, char *key) {
     size_t index = hash(key, db->capacity);
 
     for (size_t i = 0; i < db->capacity - 1; i++) {
-        size_t real_index = (index + 1) % db->capacity;
+        size_t real_index = (index + i) % db->capacity;
 
         kv_entry_t *entry = &db->entries[real_index];
 
@@ -42,7 +42,7 @@ char *kv_get(kv_t *db, char *key) {
 
         // Find an entry and keys match
         if (entry->key &&
-            entry->key != TOMBSTONE &&
+            entry->key != (void *) TOMBSTONE &&
             !strcmp(entry->key, key)) {
             return entry->value;
         }
@@ -65,7 +65,7 @@ int kv_put(kv_t *db, char *key, char *value) {
 
     for (size_t i = 0; i < db->capacity - 1; i++) {
 
-        size_t real_index = (index + 1) % db->capacity;
+        size_t real_index = (index + i) % db->capacity;
 
         kv_entry_t *entry = &db->entries[real_index];
 
