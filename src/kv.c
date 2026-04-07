@@ -31,7 +31,7 @@ char *kv_get(kv_t *db, char *key) {
     size_t index = hash(key, db->capacity);
 
     for (size_t i = 0; i < db->capacity - 1; i++) {
-        size_t real_index = (index + 1) % db->capacity;
+        size_t real_index = (index) % db->capacity;
 
         kv_entry_t *entry = &db->entries[real_index];
 
